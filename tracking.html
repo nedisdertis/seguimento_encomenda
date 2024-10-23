@@ -95,7 +95,7 @@
 
             // Se o número não estiver na tabela, exibe um status padrão
             if (status === "Número da encomenda não encontrado.") {
-                status = "Falha - Recusado CTT.";
+                status = "Falha - Recusado CTT morada inválida.";
                 statusMessage.classList.add("status-em-transito"); // Adiciona a classe para a cor verde
             } else {
                 statusMessage.classList.remove("status-em-transito"); // Remove a classe se não for em trânsito
