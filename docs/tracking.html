@@ -22,7 +22,7 @@
             font-size: 1.2em;
         }
         .status-em-transito {
-            color: red; /* Cor verde para a mensagem em trânsito */
+            color: red;
         }
         table {
             width: 100%;
@@ -68,13 +68,11 @@
         const statusMessage = document.getElementById('statusMessage');
         const trackingTable = document.getElementById('trackingTable');
 
-        // Função para obter parâmetros da URL
         function getQueryParameter(name) {
             const urlParams = new URLSearchParams(window.location.search);
             return urlParams.get(name);
         }
 
-        // Verifica se há um número de encomenda na URL
         const trackingNumberFromUrl = getQueryParameter('tracking');
         if (trackingNumberFromUrl) {
             checkTrackingNumber(trackingNumberFromUrl);
@@ -85,25 +83,21 @@
         function checkTrackingNumber(trackingNumber) {
             let status = "Número da encomenda não encontrado.";
 
-            // Lógica para verificar o status com base no número
-            // Aqui você pode definir os estados com base no número
             if (trackingNumber === "12345678-A") {
                 status = "Em Preparação";
             } else if (trackingNumber === "12345678-B") {
                 status = "Entregue";
             }
 
-            // Se o número não estiver na tabela, exibe um status padrão
             if (status === "Número da encomenda não encontrado.") {
                 status = "Falha - Recusado CTT.";
-                statusMessage.classList.add("status-em-transito"); // Adiciona a classe para a cor verde
+                statusMessage.classList.add("status-em-transito");
             } else {
-                statusMessage.classList.remove("status-em-transito"); // Remove a classe se não for em trânsito
+                statusMessage.classList.remove("status-em-transito");
             }
 
-            // Atualiza a mensagem de status
-            statusMessage.textContent = `Estado da encomenda ${trackingNumber}: ${status}`;
-            trackingTable.style.display = 'table'; // Exibir a tabela
+            statusMessage.textContent = `Envio CTT ${trackingNumber}: ${status}`;
+            trackingTable.style.display = 'table';
         }
     </script>
 
