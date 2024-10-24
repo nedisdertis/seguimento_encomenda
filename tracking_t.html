@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CTT Seguimento Interno de Encomenda Nedisdertis</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 20px;
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        .status {
+            margin-top: 20px;
+            text-align: center;
+            font-weight: bold;
+            font-size: 1.2em;
+        }
+        .status-em-transito {
+            color: green;
+        }
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: center;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="status" id="statusMessage"></div>
+
+    <table id="trackingTable" style="display:none;">
+        <thead>
+            <tr>
+                <th>Seguimento:</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td class="status">Em preparação  [ OK ]</td>
+            </tr>
+            <tr>
+                <td class="status">O processo de envio foi iniciado [ OK ]</td>
+            </tr>
+            <tr>
+                <td class="status">Validação de morada [ OK ]</td>
+            </tr>
+            <tr>
+                <td class="status">Aguarda entrada nos CTT [ EM TRÂNSITO ]</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <script>
+        const statusMessage = document.getElementById('statusMessage');
+        const trackingTable = document.getElementById('trackingTable');
+
+        function getQueryParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        const trackingNumberFromUrl = getQueryParameter('tracking');
+        if (trackingNumberFromUrl) {
+            checkTrackingNumber(trackingNumberFromUrl);
+        } else {
+            statusMessage.textContent = "Por favor, forneça um número da encomenda.";
+        }
+
+        function checkTrackingNumber(trackingNumber) {
+            let status = "Número da encomenda não encontrado.";
+
+            if (trackingNumber === "12345678-A") {
+                status = "Em Preparação";
+            } else if (trackingNumber === "12345678-B") {
+                status = "Entregue";
+            }
+
+            if (status === "Número da encomenda não encontrado.") {
+                status = "Em trânsito de armazém central.";
+                statusMessage.classList.add("status-em-transito"); 
+            } else {
+                statusMessage.classList.remove("status-em-transito");
+            }
+
+            statusMessage.textContent = `${trackingNumber}: ${status}`;
+            trackingTable.style.display = 'table';
+        }
+    </script>
+
+</body>
+</html>
