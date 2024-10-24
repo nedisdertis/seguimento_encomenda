@@ -47,7 +47,7 @@
     <table id="trackingTable" style="display:none;">
         <thead>
             <tr>
-                <th>${trackingNumber}:</th>
+                <th>Seguimento:</th>
             </tr>
         </thead>
         <tbody>
@@ -95,7 +95,7 @@
                 statusMessage.classList.remove("status-em-transito");
             }
 
-            statusMessage.textContent = `Estado: ${status}`;
+            statusMessage.textContent = `${trackingNumber}: ${status}`;
             trackingTable.style.display = 'table';
         }
     </script>
