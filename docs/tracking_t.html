@@ -47,18 +47,18 @@
     <table id="trackingTable" style="display:none;">
         <thead>
             <tr>
-                <th>Estado</th>
+                <th>${trackingNumber}:</th>
             </tr>
         </thead>
         <tbody>
             <tr>
-                <td class="status">Em Preparação [OK]</td>
+                <td class="status">Em Preparação  [ OK ]</td>
             </tr>
             <tr>
-                <td class="status">O processo de envio foi iniciado [OK]</td>
+                <td class="status">O processo de envio foi iniciado [ OK ]</td>
             </tr>
             <tr>
-                <td class="status">Aguarda entrada nos CTT [EM TRÂNSITO]</td>
+                <td class="status">Aguarda entrada nos CTT [ EM TRÂNSITO ]</td>
             </tr>
         </tbody>
     </table>
@@ -95,7 +95,7 @@
                 statusMessage.classList.remove("status-em-transito");
             }
 
-            statusMessage.textContent = `Envio CTT ${trackingNumber}: ${status}`;
+            statusMessage.textContent = `Estado: ${status}`;
             trackingTable.style.display = 'table';
         }
     </script>
