@@ -1,108 +1,51 @@
-<!DOCTYPE html>
-<html lang="pt-PT">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CTT Seguimento Interno de Encomenda Nedisdertis</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 20px;
-        }
-        h1 {
-            text-align: center;
-            color: #333;
-        }
-        .status {
-            margin-top: 20px;
-            text-align: center;
-            font-weight: bold;
-            font-size: 1.2em;
-        }
-        .status-em-transito {
-            color: red;
-        }
-        table {
-            width: 100%;
-            margin-top: 20px;
-            border-collapse: collapse;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: center;
-        }
-        th {
-            background-color: red;
-            color: white;
-        }
-
-    </style>
-</head>
-<body>
-
-    <div class="status" id="statusMessage"></div>
-
-    <table id="trackingTable" style="display:none;">
-        <thead>
-            <tr>
-                <th>Seguimento:</th>
-            </tr>
-        </thead>
-        <tbody>
-            <tr>
-                <td class="status">Em Preparação [ OK ]</td>
-            </tr>
-            <tr>
-                <td class="status">O processo de envio foi iniciado [ OK ]</td>
-            </tr>
-            <tr>
-                <td class="status">Validação de morada [ ERRO ]</td>
-            </tr>
-            <tr>
-                <td class="status">Recusado CTT a morada não permite entrega</td>
-            </tr>
-        </tbody>
-    </table>
-
-    <script>
-        const statusMessage = document.getElementById('statusMessage');
-        const trackingTable = document.getElementById('trackingTable');
-
-        function getQueryParameter(name) {
-            const urlParams = new URLSearchParams(window.location.search);
-            return urlParams.get(name);
-        }
-
-        const trackingNumberFromUrl = getQueryParameter('tracking');
-        if (trackingNumberFromUrl) {
-            checkTrackingNumber(trackingNumberFromUrl);
-        } else {
-            statusMessage.textContent = "Por favor, forneça um número da encomenda na URL.";
-        }
-
-        function checkTrackingNumber(trackingNumber) {
-            let status = "Número da encomenda não encontrado.";
-
-            if (trackingNumber === "12345678-A") {
-                status = "Em Preparação";
-            } else if (trackingNumber === "12345678-B") {
-                status = "Entregue";
+    <!DOCTYPE html>
+    <html lang="pt-PT">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>CTT Seguimento Interno de Encomenda Nedisdertis</title>
+        <style>
+            body {
+                font-family: Arial, sans-serif;
+                background-color: #f4f4f4;
+                margin: 0;
+                padding: 20px;
+            }
+            h1 {
+                text-align: center;
+                color: #333;
+            }
+            .status {
+                margin-top: 20px;
+                text-align: center;
+                font-weight: bold;
+                font-size: 1.2em;
+            }
+            .status-em-transito {
+                color: red;
+            }
+            table {
+                width: 100%;
+                margin-top: 20px;
+                border-collapse: collapse;
+            }
+            th, td {
+                border: 1px solid #ddd;
+                padding: 8px;
+                text-align: center;
+            }
+            th {
+                background-color: red;
+                color: white;
             }
 
-            if (status === "Número da encomenda não encontrado.") {
-                status = "Falha - Recusado CTT.";
-                statusMessage.classList.add("status-em-transito");
-            } else {
-                statusMessage.classList.remove("status-em-transito");
-            }
+        </style>
+    </head>
 
-            statusMessage.textContent = `${trackingNumber}: ${status}`;
-            trackingTable.style.display = 'table';
-        }
-    </script>
+        <script>
+          let seguimento = "PGJvZHk+CgogICAgPGRpdiBjbGFzcz0ic3RhdHVzIiBpZD0ic3RhdHVzTWVzc2FnZSI+PC9kaXY+CgogICAgPHRhYmxlIGlkPSJ0cmFja2luZ1RhYmxlIiBzdHlsZT0iZGlzcGxheTpub25lOyI+CiAgICAgICAgPHRoZWFkPgogICAgICAgICAgICA8dHI+CiAgICAgICAgICAgICAgICA8dGg+U2VndWltZW50bzo8L3RoPgogICAgICAgICAgICA8L3RyPgogICAgICAgIDwvdGhlYWQ+CiAgICAgICAgPHRib2R5Pgo8dHI+CiAgICA8dGQgY2xhc3M9InN0YXR1cyI+RW0gUHJlcGFyYSZjY2VkaWw7JmF0aWxkZTtvIFsgT0sgXTwvdGQ+CjwvdHI+Cjx0cj4KICAgIDx0ZCBjbGFzcz0ic3RhdHVzIj5PIHByb2Nlc3NvIGRlIGVudmlvIGZvaSBpbmljaWFkbyBbIE9LIF08L3RkPgo8L3RyPgo8dHI+CiAgICA8dGQgY2xhc3M9InN0YXR1cyI+VmFsaWRhJmNjZWRpbDsmYXRpbGRlO28gZGUgbW9yYWRhIFsgRVJSTyBdPC90ZD4KPC90cj4KPHRyPgogICAgPHRkIGNsYXNzPSJzdGF0dXMiPlJlY3VzYWRvIENUVDogYSBtb3JhZGEgbiZhdGlsZGU7byBwZXJtaXRlIGVudHJlZ2E8L3RkPgo8L3RyPgoKICAgICAgICA8L3Rib2R5PgogICAgPC90YWJsZT4KCiAgICA8c2NyaXB0PgogICAgICAgIGNvbnN0IHN0YXR1c01lc3NhZ2UgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgnc3RhdHVzTWVzc2FnZScpOwogICAgICAgIGNvbnN0IHRyYWNraW5nVGFibGUgPSBkb2N1bWVudC5nZXRFbGVtZW50QnlJZCgndHJhY2tpbmdUYWJsZScpOwoKICAgICAgICBmdW5jdGlvbiBnZXRRdWVyeVBhcmFtZXRlcihuYW1lKSB7CiAgICAgICAgICAgIGNvbnN0IHVybFBhcmFtcyA9IG5ldyBVUkxTZWFyY2hQYXJhbXMod2luZG93LmxvY2F0aW9uLnNlYXJjaCk7CiAgICAgICAgICAgIHJldHVybiB1cmxQYXJhbXMuZ2V0KG5hbWUpOwogICAgICAgIH0KCiAgICAgICAgY29uc3QgdHJhY2tpbmdOdW1iZXJGcm9tVXJsID0gZ2V0UXVlcnlQYXJhbWV0ZXIoJ3RyYWNraW5nJyk7CiAgICAgICAgaWYgKHRyYWNraW5nTnVtYmVyRnJvbVVybCkgewogICAgICAgICAgICBjaGVja1RyYWNraW5nTnVtYmVyKHRyYWNraW5nTnVtYmVyRnJvbVVybCk7CiAgICAgICAgfSBlbHNlIHsKICAgICAgICAgICAgc3RhdHVzTWVzc2FnZS50ZXh0Q29udGVudCA9ICJQb3IgZmF2b3IsIGZvcm5lw6dhIHVtIG7Dum1lcm8gZGEgZW5jb21lbmRhIG5hIFVSTC4iOwogICAgICAgIH0KCiAgICAgICAgZnVuY3Rpb24gY2hlY2tUcmFja2luZ051bWJlcih0cmFja2luZ051bWJlcikgewogICAgICAgICAgICBsZXQgc3RhdHVzID0gIk7Dum1lcm8gZGEgZW5jb21lbmRhIG7Do28gZW5jb250cmFkby4iOwoKICAgICAgICAgICAgaWYgKHRyYWNraW5nTnVtYmVyID09PSAiMTIzNDU2NzgtQSIpIHsKICAgICAgICAgICAgICAgIHN0YXR1cyA9ICJFbSBQcmVwYXJhw6fDo28iOwogICAgICAgICAgICB9IGVsc2UgaWYgKHRyYWNraW5nTnVtYmVyID09PSAiMTIzNDU2NzgtQiIpIHsKICAgICAgICAgICAgICAgIHN0YXR1cyA9ICJFbnRyZWd1ZSI7CiAgICAgICAgICAgIH0KCiAgICAgICAgICAgIGlmIChzdGF0dXMgPT09ICJOw7ptZXJvIGRhIGVuY29tZW5kYSBuw6NvIGVuY29udHJhZG8uIikgewogICAgICAgICAgICAgICAgc3RhdHVzID0gIkZhbGhhIC0gUmVjdXNhZG8gQ1RULiI7CiAgICAgICAgICAgICAgICBzdGF0dXNNZXNzYWdlLmNsYXNzTGlzdC5hZGQoInN0YXR1cy1lbS10cmFuc2l0byIpOwogICAgICAgICAgICB9IGVsc2UgewogICAgICAgICAgICAgICAgc3RhdHVzTWVzc2FnZS5jbGFzc0xpc3QucmVtb3ZlKCJzdGF0dXMtZW0tdHJhbnNpdG8iKTsKICAgICAgICAgICAgfQoKICAgICAgICAgICAgc3RhdHVzTWVzc2FnZS50ZXh0Q29udGVudCA9IGAke3RyYWNraW5nTnVtYmVyfTogJHtzdGF0dXN9YDsKICAgICAgICAgICAgdHJhY2tpbmdUYWJsZS5zdHlsZS5kaXNwbGF5ID0gJ3RhYmxlJzsKICAgICAgICB9CiAgICA8L3NjcmlwdD4K";
+          document.write(atob(seguimento));
+        </script>
 
-</body>
-</html>
+    </body>
+    </html>
